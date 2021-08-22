@@ -9,7 +9,7 @@ tem o objetivo de criar uma kernel simples para AVR
 melhorias nas bibliotecas do repositório 
 [AVR](https://github.com/RecursiveError/AVR)
 ### bibliotecas em melhoria:
-[LCD](https://github.com/RecursiveError/AVR/tree/main/SO/lib/LCD)
+[LCD](https://github.com/RecursiveError/AVR/tree/main/SO/lib/LCD),
 [Serial_output](https://github.com/RecursiveError/AVR/tree/main/SO/lib/SO)
 
 
