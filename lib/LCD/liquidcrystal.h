@@ -6,19 +6,29 @@ header para gerenciar LCDs
 */
 #ifndef _LIQUIDCRYSTAL_H
 #define _LIQUIDCRYSTAL_H
+#include <stdarg.h>
+#include "lcd/lcd_baseclass.h"
 
-    #if defined (__LCD_8BITS__)
-        #error "LCD 8bits ainda não foi implementado"
-    #elif defined (__LCD_595__)
-        #include "lcd/liquidcrystal_expander_595.h"
-    #elif defined (__LCD_I2C__)
-        #error "LCD I2C ainda não foi implementado"
-    #elif defined (__LCD_4BITS__)
-        #error "LCD 4bits ainda não foi implementado"
-    #else 
-        /*Default include*/
-        #include "lcd/liquidcrystal_expander_595.h"
-    #endif
+#define new_liquidcrystal(type, mode, ...) _liquidcrystal_C(type, mode,(int[]){__VA_ARGS__})
+//TIPOS DE DISPLAYS disponeveis
+typedef enum{
+    _NORMAL_ = 1,
+    _SHIFT_74HC595_ = 6
+}lcd_type;
+
+typedef struct liquidcrystal{
+    liquidcrystal_base *super;
+    lcd_type type;
+    void (*init)(struct liquidcrystal *const);
+    void (*write)(struct liquidcrystal *const, char *);
+    void (*write_char)(struct liquidcrystal *const, char);
+    void (*write_number)(struct liquidcrystal *const, int8_t);
+    void (*set_position)(struct liquidcrystal *const, uint8_t, uint8_t);
+    void (*command)(struct liquidcrystal *const, uint8_t);
+}liquidcrystal;
+
+liquidcrystal* _liquidcrystal_C(lcd_type type, operating_mode mode, int pins[static 11]);
+
 
 
 #endif

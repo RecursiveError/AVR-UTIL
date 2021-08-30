@@ -12,27 +12,13 @@ essa biblioteca também é compatível com controladores semelhantes ao shift-re
 
 
 #include <stdint.h>
-
-#include "serial_output.h"//inclue o controlador
-
-//"objeto" para o LCD
-typedef struct liquidcrystal_expander_595{
-    serial_output controler;
-    uint8_t resister_select;
-    uint8_t enable;
-}LCD;
-
-//default values
+#include<lcd/lcd_baseclass.h>
+#include "serial_output.h"
 #define RS 8
 #define EN 9
-void lcd_init(LCD *const self, uint8_t register_select, uint8_t enable);
-void lcd_send_char(LCD *const self, char value);
-void lcd_send_string(LCD *const self, char string[]);
-void lcd_send_number(LCD *const self, int value);
-void lcd_set_position(LCD *const self, int linha, int coluna);
-void lcd_pulse(LCD *const self);
-void lcd_command(LCD *const self, char value);
 
+typedef liquidcrystal_base liquidcrystal_595;
 
-
+liquidcrystal_595* _liquidcrystal_595_C(operating_mode mode, uint8_t data, uint8_t clock,uint8_t enable,\
+                                       uint8_t register_select, uint8_t lcd_enable);
 #endif

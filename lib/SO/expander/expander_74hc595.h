@@ -21,10 +21,12 @@ typedef struct expander_74hc595{
     uint8_t data;
     uint8_t clock;
     uint8_t enable;
+    void (*write)(struct expander_74hc595 *const, char);
+    
 }serial_output;
 
-uint8_t so_init(serial_output *const self, uint8_t data, uint8_t clock, uint8_t enable);
-uint8_t so_write(serial_output *const self, char value);
+//construtor
+serial_output* serial_output_C(uint8_t data, uint8_t clock, uint8_t enable);
 
 
 
