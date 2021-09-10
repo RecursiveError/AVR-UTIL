@@ -26,6 +26,12 @@ namespace liquidcrystal{
             {
                 this->_mode = _LCD_4BITS_;
             }
+            virtual Liquidcrystal595_4bits& init(uint8_t line, uint8_t cols) override;
+            virtual Liquidcrystal595_4bits& write(char value) override;
+            virtual Liquidcrystal595_4bits& write(int value) override;
+            virtual Liquidcrystal595_4bits& write(char* value) override;
+            virtual Liquidcrystal595_4bits& config(uint8_t flag) override;
+            virtual Liquidcrystal595_4bits& set_curso(uint8_t line, uint8_t cols) override;
         private:
             serial_output::Expander_74hc595 controller;
             digitalIO::DigitalIO register_select, enable;
