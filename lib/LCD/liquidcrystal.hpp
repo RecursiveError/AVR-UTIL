@@ -24,9 +24,9 @@ namespace liquidcrystal{
         protected:
             uint8_t _line{0}, _cols{0}, _mode{0};
         private:
-            virtual void pulse();
-            virtual void set_pins();
-            virtual void send(uint8_t value, bool std);
+            virtual void pulse() = 0;
+            virtual void set_pins() = 0;
+            virtual void send(uint8_t value, bool std) = 0;
     };
 }
 

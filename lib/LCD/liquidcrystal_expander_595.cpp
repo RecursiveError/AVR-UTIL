@@ -10,6 +10,35 @@ Adaptada para o Shift-Register 74HC595
 #include "liquidcrystal_expander_595.hpp"
 
 namespace liquidcrystal {
+    Liquidcrystal595_4bits& Liquidcrystal595_4bits::init(uint8_t line, uint8_t cols){
+        Liquidcrystal::init(line, cols);
+        return *this;
+    }
+
+    Liquidcrystal595_4bits& Liquidcrystal595_4bits::write(char value){
+        Liquidcrystal::write(value);
+        return *this;
+    }
+
+    Liquidcrystal595_4bits& Liquidcrystal595_4bits::write(int value){
+        Liquidcrystal::write(value);
+        return *this;
+    }
+
+    Liquidcrystal595_4bits& Liquidcrystal595_4bits::write(char* value){
+        Liquidcrystal::write(value);
+        return *this;
+    }
+    Liquidcrystal595_4bits& Liquidcrystal595_4bits::config(uint8_t flag){
+        Liquidcrystal::config(flag);
+        return *this;
+    }
+    Liquidcrystal595_4bits& Liquidcrystal595_4bits::set_curso(uint8_t line, uint8_t cols){
+        Liquidcrystal::set_curso(line, cols);
+        return *this;
+    }
+
+
     void Liquidcrystal595_4bits::send(uint8_t value, bool std){
         if(std) register_select.set_high();
         else register_select.set_low();
