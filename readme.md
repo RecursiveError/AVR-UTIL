@@ -1,9 +1,14 @@
 # AVR-UTIL
-esse projeto faz parte do repositório 
+esse projeto é uma extensão do repositório:
+
 [AVR](https://github.com/RecursiveError/AVR)
 
-tem o objetivo de criar uma kernel simples para AVR
-(inicialmente somente para o atmel328p)
+tem o objetivo de criar uma coleção de bibliotecas para AVR usando C++ com técnica modernas de programação   
+
+#### AVISO
+Esse repositório tem apenas o intuito de demostrar os usos de C++ moderno em ambientes embarcados bare-metal 
+
+as bibliotecas apenas terão porte para o microcontrolador Atmel328p 
 
 ## fase atual:
 melhorias nas bibliotecas do repositório 
@@ -14,9 +19,9 @@ melhorias nas bibliotecas do repositório
 
 
 ## próximas fases:
-- codigo do kernel cooperativo
-- codigo do kernel real-time
-- criação de drives
-- versão final com um sistema operacinal simples
+- melhoria na lib Console
+- melhoria na lib Timer
+- melhoria na lib Interrupt
+
 
 
