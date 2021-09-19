@@ -8,6 +8,10 @@ header para gerenciar LCDs
 #define _LIQUIDCRYSTAL_HPP
 
 #include <stdint.h>
+#include <util/delay.h>
+#include <WString.h>
+#include "unique_ptr.hpp"
+#include "lcd_package.hpp"
 
 #define _LCD_8BITS_ 1
 #define _LCD_4BITS_ 2
@@ -15,20 +19,25 @@ header para gerenciar LCDs
 namespace liquidcrystal{
     class Liquidcrystal{
         public:
-            virtual Liquidcrystal& init(uint8_t line, uint8_t cols);
-            virtual Liquidcrystal& write(char value);
-            virtual Liquidcrystal& write(int value);
-            virtual Liquidcrystal& write(char* value);
-            virtual Liquidcrystal& config(uint8_t flag);
-            virtual Liquidcrystal& set_curso(uint8_t line, uint8_t cols);
-        protected:
-            uint8_t _line{0}, _cols{0}, _mode{0};
+            template <class lcd_config>
+            Liquidcrystal(lcd_config Tconfig){
+                lcd_type = fakestd::make_uniq<lcd_config>(Tconfig);
+            }
+
+            Liquidcrystal& init(uint8_t cols, uint8_t line);
+
+            Liquidcrystal& write(char value);
+
+            Liquidcrystal& write(int value);
+
+            Liquidcrystal& write(String value);
+
+            Liquidcrystal& config(uint8_t flag);
+
+            Liquidcrystal& set_cursor(uint8_t line, uint8_t cols);
         private:
-            virtual void pulse() = 0;
-            virtual void set_pins() = 0;
-            virtual void send(uint8_t value, bool std) = 0;
+            uint8_t _cols{0}, _line{0};
+            fakestd::uniq_ptr<lcdbaseclass> lcd_type;
     };
 }
-
-
 #endif
