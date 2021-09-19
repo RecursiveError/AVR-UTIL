@@ -1,4 +1,4 @@
-# AVR-KERNEL
+# AVR-UTIL
 esse projeto faz parte do repositório 
 [AVR](https://github.com/RecursiveError/AVR)
 
