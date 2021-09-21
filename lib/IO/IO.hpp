@@ -9,7 +9,7 @@ biblioteca com as funções basicas de perifericos E operações para manipulaç
 namespace digitalIO{
     class DigitalIO{
         public:
-        DigitalIO() = default;
+        DigitalIO() = delete;
         DigitalIO(uint8_t pin) : _pin{pin}
         {}
         DigitalIO& output(void);

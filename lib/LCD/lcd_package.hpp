@@ -30,12 +30,11 @@ namespace liquidcrystal{
             void send(uint8_t value, bool std) override;
         private:
             serial_output::Expander_74hc595 controller;
-            digitalIO::DigitalIO register_select, enable;
+            uint8_t register_select, enable;
     };
 
     class Lcd2EN_4bits : public lcdbaseclass{
         public:
-            Lcd2EN_4bits() = delete;
             Lcd2EN_4bits(uint8_t RS, uint8_t EN1, uint8_t EN2, uint8_t D0, uint8_t D1,uint8_t D2, uint8_t D3) :
                 register_select{RS},
                 enable{EN2},
@@ -50,8 +49,8 @@ namespace liquidcrystal{
             void send4bits(uint8_t value);
             void pulse2EN(uint8_t std);
         private:
-            uint8_t enable1, enable2;
-            digitalIO::DigitalIO register_select, enable;
+            uint8_t enable1{0}, enable2{0};
+            digitalIO::DigitalIO register_select{0}, enable{0};
             digitalIO::DigitalIO pins[4];
     };
 }

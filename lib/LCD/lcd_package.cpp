@@ -9,11 +9,13 @@ Adaptada para o Shift-Register 74HC595
 #include "IO.hpp"
 #include "lcd_package.hpp"
 
+using namespace digitalIO;
+
 namespace liquidcrystal {
     // --------------- LCD595_4BITS  FUNCTIONS ---------------
     void Lcd595_4bits::send(uint8_t value, bool std){
-        if(std) register_select.set_high();
-        else register_select.set_low();
+        if(std) DigitalIO(this->register_select).set_high();
+        else DigitalIO(this->register_select).set_low();
         this->controller.send(value >> 4);
         this->pulse();
         this->controller.send(value & 0X0F);
@@ -21,15 +23,15 @@ namespace liquidcrystal {
     }
 
     void Lcd595_4bits::pulse(){
-        this->enable.set_high();
+        DigitalIO(this->enable).set_high();
         _delay_us(5);
-        this->enable.set_low();
+        DigitalIO(this->enable).set_low();
         _delay_us(5);
     }
     void Lcd595_4bits::set_pins(){
         this->controller.init().send(0x00);
-        this->register_select.output().set_low();
-        this->enable.output().set_low();
+        DigitalIO(this->register_select).output().set_low();
+        DigitalIO(this->enable).output().set_low();
     }
     void Lcd595_4bits::set_cursor(uint8_t line, uint8_t cols){
         uint8_t command = (0x80 | (line<<6)) + cols;
