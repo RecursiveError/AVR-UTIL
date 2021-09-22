@@ -10,9 +10,9 @@
 using namespace liquidcrystal;
 
 int main(){
-	Liquidcrystal my_obj(Lcd595(4,13,12,2,3));
-	my_obj.init(16,2)
-		.write("ABCDE");
+	Liquidcrystal(Lcd595(4,13,12,2,3))
+		.init(16,2)
+		.write("TESTE");
 	/*
 	Liquidcrystal(Lcd2EN_4bits(7,6,5,8,9,10,11))
 	.init(40, 4)

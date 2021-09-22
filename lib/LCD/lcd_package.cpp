@@ -24,9 +24,9 @@ namespace liquidcrystal {
 
     void Lcd595::pulse(){
         this->enable.set_high();
-        _delay_us(10);
+        _delay_us(5);
         this->enable.set_low();
-        _delay_us(10);
+        _delay_us(5);
     }
     void Lcd595::set_pins(){
         this->controller.init().send(0x00);

@@ -17,7 +17,7 @@ namespace liquidcrystal{
         this->config(0X3);//ESTADO DA COMUNICAÇÃO É 8BITS
         _delay_us(160);
         //if(this->lcd_type->_mode == _LCD_4BITS_){
-            this->config(0x2);//0B0011 0000
+            this->config(0x2);
         //}
         _delay_ms(10);
         //confg do display
