@@ -10,18 +10,20 @@
 using namespace liquidcrystal;
 
 int main(){
-	Liquidcrystal(Lcd595(4,13,12,2,3))
-		.init(16,2)
-		.write("TESTE");
 	/*
+	Liquidcrystal(Lcd_4bits(7,6,8,9,10,11))
+		.init(16,2)
+		.write("BOM DIA")
+		.set_cursor(1,10)
+		.write("TESTE");
+	*/
 	Liquidcrystal(Lcd2EN_4bits(7,6,5,8,9,10,11))
 	.init(40, 4)
-	.write("just a teste 2")
+	.write("bom dia")
 	.set_cursor(1,0)
-	.write("just a teste 2")
-	.set_cursor(3,0)
-	.write("123456789");
-	*/                        
+	.write("glr ")
+	.set_cursor(2,10)
+	.write("asihfbaeiyfgsae9ufgh");                        
 	for(;;);
 	return 0;
 }

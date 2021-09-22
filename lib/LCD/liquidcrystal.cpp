@@ -10,21 +10,23 @@ namespace liquidcrystal{
         this->lcd_type->set_pins();
         this->_line = line;
         this->_cols = cols;
+
+        //inicia o modo de 4bits
         this->config(0X3);
         _delay_ms(5);
         this->config(0X3);
         _delay_us(160);
         this->config(0X3);//ESTADO DA COMUNICAÇÃO É 8BITS
         _delay_us(160);
-        //if(this->lcd_type->_mode == _LCD_4BITS_){
-            this->config(0x2);
-        //}
+        this->config(0x2);
         _delay_ms(10);
+        
         //confg do display
         config(0x28);
         config(0x0C);
         config(0x01);
         _delay_us(15);
+        
         return *this;
     }
 

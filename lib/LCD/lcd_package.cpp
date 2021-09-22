@@ -68,7 +68,8 @@ namespace liquidcrystal {
     }
 
     void Lcd_4bits::set_cursor(uint8_t line, uint8_t cols){
-        
+        uint8_t command = (0x80 | (line<<6)) + cols;
+        this->send(command, false);
     }
 
     void Lcd_4bits::send_nibble(uint8_t value){
@@ -90,45 +91,26 @@ namespace liquidcrystal {
     // --------------- LCD2EN_4BITS  FUNCTIONS ---------------
 
     void Lcd2EN_4bits::send(uint8_t value, bool std){
-        if(std) this->register_select.set_high();
-        else this->register_select.set_low();
-        this->send4bits(value >> 4);
-        this->pulse();
-        this->send4bits(value & 0x0F);
-        this->pulse();
-    }
-    
-    void Lcd2EN_4bits::send4bits(uint8_t value){
-        for(auto i : this->pins){
-            if(value & 0x01){
-                i.set_high();
-            }else{
-                i.set_low();
-            }
-            value >>= 1;
+        if(std){
+            this->_corrent->send(value, std);
+        }else{
+            this->_high.send(value, std);
+            this->_low.send(value, std);
         }
     }
 
     void Lcd2EN_4bits::pulse(){
-        this->enable.set_high();
-        _delay_us(5);
-        this->enable.set_low();
-        _delay_us(5);
+        //not implemented
     }
 
     void Lcd2EN_4bits::set_pins(){
-        this->enable.output().set_low();
-        this->enable = enable1;
-        this->enable.output().set_low();
-        this->register_select.output();
-        for(auto i: this->pins){
-            i.output().set_low();
-        }
+        this->_high.set_pins();
+        this->_low.set_pins();
     }
 
     void  Lcd2EN_4bits::set_cursor(uint8_t line, uint8_t cols){
-        if(line < 2) this->enable = enable1;
-        else this->enable = enable2;
+        if(line < 2) this->_corrent = &_high;
+        else this->_corrent = &_low;
         uint8_t command = (0x80 | (line<<6)) + cols;
         this->send(command, false);
     }
