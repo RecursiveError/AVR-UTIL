@@ -14,22 +14,24 @@ using namespace digitalIO;
 namespace liquidcrystal {
     // --------------- LCD595  FUNCTIONS ---------------
     void Lcd595::send(uint8_t value, bool std){
-        if(std) DigitalIO(this->register_select).set_high();
-        else DigitalIO(this->register_select).set_low();
-        this->controller.send(value);
+        if(std) this->register_select.set_high();
+        else this->register_select.set_low();
+        this->controller.send(value >> 4);
+        this->pulse();
+        this->controller.send(value & 0X0F);
         this->pulse();
     }
 
     void Lcd595::pulse(){
-        DigitalIO(this->enable).set_high();
+        this->enable.set_high();
         _delay_us(10);
-        DigitalIO(this->enable).set_low();
+        this->enable.set_low();
         _delay_us(10);
     }
     void Lcd595::set_pins(){
         this->controller.init().send(0x00);
-        DigitalIO(this->register_select).output().set_low();
-        DigitalIO(this->enable).output().set_low();
+        this->register_select.output().set_low();
+        this->enable.output().set_low();
     }
     void Lcd595::set_cursor(uint8_t line, uint8_t cols){
         uint8_t command = (0x80 | (line<<6)) + cols;

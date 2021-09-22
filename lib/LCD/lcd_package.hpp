@@ -30,7 +30,7 @@ namespace liquidcrystal{
             void send(uint8_t value, bool std) override;
         private:
             serial_output::Expander_74hc595 controller;
-            uint8_t register_select, enable;
+            digitalIO::DigitalIO register_select, enable;
     };
 
     class Lcd_4bits : public lcdbaseclass{

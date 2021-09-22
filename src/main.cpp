@@ -12,7 +12,6 @@ using namespace liquidcrystal;
 int main(){
 	Liquidcrystal my_obj(Lcd595(4,13,12,2,3));
 	my_obj.init(16,2)
-		.set_cursor(1,10)
 		.write("ABCDE");
 	/*
 	Liquidcrystal(Lcd2EN_4bits(7,6,5,8,9,10,11))
