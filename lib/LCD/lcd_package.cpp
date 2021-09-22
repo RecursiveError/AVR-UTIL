@@ -12,36 +12,81 @@ Adaptada para o Shift-Register 74HC595
 using namespace digitalIO;
 
 namespace liquidcrystal {
-    // --------------- LCD595_4BITS  FUNCTIONS ---------------
-    void Lcd595_4bits::send(uint8_t value, bool std){
+    // --------------- LCD595  FUNCTIONS ---------------
+    void Lcd595::send(uint8_t value, bool std){
         if(std) DigitalIO(this->register_select).set_high();
         else DigitalIO(this->register_select).set_low();
-        this->controller.send(value >> 4);
-        this->pulse();
-        this->controller.send(value & 0X0F);
+        this->controller.send(value);
         this->pulse();
     }
 
-    void Lcd595_4bits::pulse(){
+    void Lcd595::pulse(){
         DigitalIO(this->enable).set_high();
-        _delay_us(5);
+        _delay_us(10);
         DigitalIO(this->enable).set_low();
-        _delay_us(5);
+        _delay_us(10);
     }
-    void Lcd595_4bits::set_pins(){
+    void Lcd595::set_pins(){
         this->controller.init().send(0x00);
         DigitalIO(this->register_select).output().set_low();
         DigitalIO(this->enable).output().set_low();
     }
-    void Lcd595_4bits::set_cursor(uint8_t line, uint8_t cols){
+    void Lcd595::set_cursor(uint8_t line, uint8_t cols){
         uint8_t command = (0x80 | (line<<6)) + cols;
         this->send(command, false);
     }
-    // --------------- LCD595_4BITS  FUNCTIONS ---------------
+
+    // --------------- LCD595  FUNCTIONS ---------------
+
+    //-----------------------------------------------------
+
+    // --------------- LCD_4BITS  FUNCTIONS ---------------
+    void Lcd_4bits::send(uint8_t value, bool std){
+        if(std) this->register_select.set_high();
+        else this->register_select.set_low();
+        this->send_nibble(value >> 4);
+        this->pulse();
+        this->send_nibble(value & 0x0F);
+        this->pulse();
+    }
+
+    void Lcd_4bits::pulse(){
+        this->enable.set_high();
+        _delay_us(5);
+        this->enable.set_low();
+        _delay_us(5);
+    }
+
+    void Lcd_4bits::set_pins(){
+        this->enable.output().set_low();
+        this->register_select.output().set_low();
+        for(auto pin : this->pins){
+            pin.output().set_low();
+        }
+    }
+
+    void Lcd_4bits::set_cursor(uint8_t line, uint8_t cols){
+        
+    }
+
+    void Lcd_4bits::send_nibble(uint8_t value){
+        for(auto pin : this->pins){
+            if(value & 0x01){
+                pin.set_high();
+            }else{
+                pin.set_low();
+            }
+            value >>= 1;
+        }
+    }
+
+
+    // --------------- LCD_4BITS  FUNCTIONS ---------------
 
     //-----------------------------------------------------
 
     // --------------- LCD2EN_4BITS  FUNCTIONS ---------------
+
     void Lcd2EN_4bits::send(uint8_t value, bool std){
         if(std) this->register_select.set_high();
         else this->register_select.set_low();
@@ -85,5 +130,9 @@ namespace liquidcrystal {
         uint8_t command = (0x80 | (line<<6)) + cols;
         this->send(command, false);
     }
+    // --------------- LCD2EN_4BITS  FUNCTIONS ---------------
 
+    //-----------------------------------------------------
+
+    // --------------- LCD_4BITS  FUNCTIONS ---------------
 }
