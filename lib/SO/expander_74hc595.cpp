@@ -9,22 +9,13 @@ biblioteca para expansão de portas OUTPUT usando o shift-Register 74hc595
 #include "IO.hpp"
 #include "expander_74hc595.hpp"
 
+using namespace digitalIO;
 
 namespace serial_output{
     Expander_74hc595& Expander_74hc595::init(void){
-        this->_data.output();
-        this->_clock.output();
-        this->_enable.output();
-        return *this;
-    }
-
-    Expander_74hc595& Expander_74hc595::init(uint8_t data, uint8_t clock, uint8_t enable){
-        this->_data = digitalIO::DigitalIO(data);
-        this->_clock = digitalIO::DigitalIO(clock);
-        this->_enable = digitalIO::DigitalIO(enable);
-        this->_data.output();
-        this->_clock.output();
-        this->_enable.output();
+        this->_data.output().set_low();
+        this->_clock.output().set_low();
+        this->_enable.output().set_low();        
         return *this;
     }
 
