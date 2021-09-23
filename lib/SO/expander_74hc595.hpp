@@ -24,7 +24,7 @@ namespace serial_output{
             Expander_74hc595& init(void);
             Expander_74hc595& send(uint8_t value);
         private:
-            uint8_t _data, _clock, _enable;
+            digitalIO::DigitalIO _data, _clock, _enable;
             void pulse_clock(void);
             void pulse_enable(void);
     };
