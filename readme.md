@@ -15,11 +15,11 @@ melhorias nas bibliotecas do repositório
 [AVR](https://github.com/RecursiveError/AVR)
 ### bibliotecas em melhoria:
 
-[x] [IO](lib/IO)
-[x] [Serial_output](lib/SO)
-[x] [LCD](lib/LCD)
-[] melhoria na lib Serial
-[] melhoria na lib Console
-[] melhoria na lib Timer
-[] melhoria na lib Interrupt
+- [x] [IO](lib/IO)
+- [x] [Serial_output](lib/SO)
+- [x] [LCD](lib/LCD)
+- [] melhoria na lib Serial
+- [] melhoria na lib Console
+- [] melhoria na lib Timer
+- [] melhoria na lib Interrupt
 
