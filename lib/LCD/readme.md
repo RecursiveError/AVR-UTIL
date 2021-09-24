@@ -12,7 +12,7 @@ o uso desse tipo de dispositivo é bastante complexo em C, pela falta de OO e fi
 
 
 
-outra motivação é a quebra das boas práticas de OO e o pobre uso dos recursos da linguagem em outras bibliotecas para embarcados, é totalmente possível tem um codigo embarcado e moderno sem abrir mão do desempenho, esta biblioteca apesar de simples segue todos os conceitos de S.O.L.I.D e possue uma escrita fluida 
+outra motivação é a quebra das boas práticas de OO e o pobre uso dos recursos da linguagem em outras bibliotecas para embarcados, é totalmente possível ter um codigo embarcado e moderno sem abrir mão do desempenho, esta biblioteca apesar de simples segue todos os conceitos de S.O.L.I.D e possue uma escrita fluida 
 
 
 
