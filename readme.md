@@ -18,6 +18,7 @@ melhorias nas bibliotecas do repositório
 - [x] [IO](lib/IO)
 - [x] [Serial_output](lib/SO)
 - [x] [LCD](lib/LCD)
+- [ ] melhoria na lib ADC
 - [ ] melhoria na lib Serial
 - [ ] melhoria na lib Console
 - [ ] melhoria na lib Timer

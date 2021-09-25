@@ -1,24 +1,23 @@
-#include "liquidcrystal.hpp"
-#include <WString.h>
-
-
-using namespace liquidcrystal;
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <avr/io.h>
+#include "interrupt.hpp"
+#include "IO.hpp"
 
 int main(){
-	Liquidcrystal(Lcd595(4,13,12,2,3))
-		.init(16,2)
-		.write("ola, mundo!")
-		.set_cursor(1,10)
-		.write("TESTE");
+	digitalIO::DigitalIO led(2);
+	led.output().set_high();
+	TCCR0A = 0x00;//timer em modo normal
+	TCCR0B = 0B101;//prescaler de 64
+	TIMSK0 = (1<<TOIE0);//interrupção no overflow do timer
+	sei();
+	handler.set_handle(TIMER0_OVF_vect_num, [](){
+		digitalIO::DigitalIO(2).toggle();
+		return;
+	});
 
-	Liquidcrystal(Lcd2EN_4bits(7,6,5,8,9,10,11))
-		.init(40, 4)
-		.write("ola, mundo!")
-		.set_cursor(1,0)
-		.write("bom dia")
-		.set_cursor(2,10)
-		.write("123456789");
 
-	for(;;);
+	for(;;){
+	}
 	return 0;
 }
