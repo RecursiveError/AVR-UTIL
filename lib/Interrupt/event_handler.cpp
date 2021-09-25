@@ -1,6 +1,4 @@
-#include <avr/interrupt.h>
-#include "IO.hpp"
-#include "interrupt_handle.hpp"
+#include "event_handler.hpp"
 
 namespace interrupt{
     void Interrupt::set_handle(uint8_t interrupt_num, handler_func callback){
