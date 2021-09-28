@@ -1,21 +1,20 @@
-#include <avr/interrupt.h>
-#include <util/delay.h>
-#include <avr/io.h>
+#include "external_int.hpp"
 #include "interrupt.hpp"
+#include "util/delay.h"
 #include "IO.hpp"
 
+using namespace external_int;
 int main(){
-	digitalIO::DigitalIO led(2);
-	led.output().set_high();
-	TCCR1A = 0x00;//timer em modo normal
-	TCCR1B = 0x3;//prescaler de 64
-	TIMSK1 = (1<<TOIE0);//interrupção no overflow do timer
+
+	external_int::External_int()
+		.config(_INT0_,_DOWN_)
+		.event_on(_INT0_, [](){
+		digitalIO::DigitalIO(4).output().toggle();
+		});
 	sei();
-	interrupt::handler.set_handle(TIMER1_OVF_vect_num, [](){
-		digitalIO::DigitalIO(2).toggle();
-		return;
-	});
-	
-	for(;;);
+	for(;;){
+		digitalIO::DigitalIO(3).output().toggle();
+		_delay_ms(500);
+	}
 	return 0;
 }
