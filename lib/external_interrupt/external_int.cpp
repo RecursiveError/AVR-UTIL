@@ -4,23 +4,6 @@
 
 
 namespace external_int{
-    External_int& External_int::config(int pin, int mode){
-        switch(pin){
-            case _INT1_:
-                EICRA |= (mode <<= 2);
-                EIMSK |= 1<<1;
-                digitalIO::DigitalIO(3).input_pullup();
-                break;
-            case _INT0_:
-                EICRA |= mode;
-                EIMSK |= 1<<0;
-                digitalIO::DigitalIO(2).input_pullup();
-                break;
-        }
-        interrupt::handler.enable();
-        return *this;
-    }
-
     External_int& External_int::event_on(int pin, int mode, handler_func callback){
         switch(pin){
             case _INT0_:

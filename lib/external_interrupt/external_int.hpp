@@ -18,8 +18,6 @@ namespace external_int{
 
     class External_int{
         public:
-            //CONFIGURA O MODO DE FUNCIONAMENTO (HABILITA A CHAVE DE INTERRUPÇÃO GLOBAL!)
-            External_int& config(int pin, int mode);
             //Desabilita a interrupção (NÃO DESABILITA A CHAVE DE INTERRUPÇÃO GLOBAL!)
             External_int& disable(int pin);
             //cria um handler para o evento
