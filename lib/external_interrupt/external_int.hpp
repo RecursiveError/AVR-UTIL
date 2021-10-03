@@ -6,9 +6,6 @@ namespace external_int{
     enum External_pin{
         _INT0_ = 0,
         _INT1_,
-        _PCINT0_,
-        _PCINT1_,
-        _PCINT2_
     };
 
     enum mode{
@@ -26,7 +23,7 @@ namespace external_int{
             //Desabilita a interrupção (NÃO DESABILITA A CHAVE DE INTERRUPÇÃO GLOBAL!)
             External_int& disable(int pin);
             //cria um handler para o evento
-            External_int& event_on(int pin, handler_func callback);
+            External_int& event_on(int pin, int mode, handler_func callback = nullptr);
     };
 }
 #endif
