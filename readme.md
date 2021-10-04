@@ -22,5 +22,5 @@ melhorias nas bibliotecas do repositório
 - [ ] melhoria na lib Serial
 - [ ] melhoria na lib Console
 - [ ] melhoria na lib Timer
-- [ ] melhoria na lib Interrupt
+- [x] [melhoria na lib Interrupt](lib/Interrupt)
 
