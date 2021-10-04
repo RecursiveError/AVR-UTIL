@@ -5,6 +5,13 @@ Autor: RecursiveError
 Simples Handler para as interrupções 
 */
 
+/*
+Programa: event_handler
+Autor: RecursiveError
+
+Simples Handler para as interrupções 
+*/
+
 #ifndef _EVENT_HANDLER_HPP
 #define _EVENT_HANDLER_HPP
 
