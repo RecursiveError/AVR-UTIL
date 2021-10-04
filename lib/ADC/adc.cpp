@@ -1,0 +1,3 @@
+namespace adc{
+ class Adc{};   
+}

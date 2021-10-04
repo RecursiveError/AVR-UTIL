@@ -14,14 +14,13 @@ as bibliotecas apenas terão porte para o microcontrolador Atmel328p
 melhorias nas bibliotecas do repositório 
 [AVR](https://github.com/RecursiveError/AVR)
 ### bibliotecas em melhoria:
-[LCD](https://github.com/RecursiveError/AVR/tree/main/SO/lib/LCD),
-[Serial_output](https://github.com/RecursiveError/AVR/tree/main/SO/lib/SO)
 
-
-## próximas fases:
-- melhoria na lib Console
-- melhoria na lib Timer
-- melhoria na lib Interrupt
-
-
+- [x] [IO](lib/IO)
+- [x] [Serial_output](lib/SO)
+- [x] [LCD](lib/LCD)
+- [ ] melhoria na lib ADC
+- [ ] melhoria na lib Serial
+- [ ] melhoria na lib Console
+- [ ] melhoria na lib Timer
+- [x] [melhoria na lib Interrupt](lib/Interrupt)
 

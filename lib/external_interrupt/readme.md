@@ -1,12 +1,28 @@
+# External_int
+
+biblioteca para trabalhar com as interrupções externas no Atmel328p
+
+
+
+### motivação 
+
+Essa biblioteca abstrai o uso da interrupções externas.
+
+é apenas um teste para mostrar o uso de abstrações no baremetal
+
+
+
+### uso
+
+```C++
 #include "external_int.hpp"
-#include "interrupt.hpp"
 #include "util/delay.h"
 #include "IO.hpp"
 
 using namespace external_int;
 int main(){
 
-	external_int::External_int()
+	External_int()
 		.event_on(_INT0_, _DOWN_, [](){
 			digitalIO::DigitalIO(4).output().toggle();
 		})
@@ -20,3 +36,5 @@ int main(){
 	}
 	return 0;
 }
+```
+

@@ -27,10 +27,10 @@ namespace digitalIO{
     DigitalIO& DigitalIO::input_pullup(void){
         if(this->_pin < 8){
             DDRD &= ~(1<<this->_pin);
-            this->output();
+            this->set_high();
         }else{
             DDRB &= ~(1<<(this->_pin - 8u));
-            this->output();
+            this->set_high();
         }
         return *this;
     }
