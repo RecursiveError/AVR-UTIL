@@ -9,10 +9,10 @@ namespace external_int{
     };
 
     enum mode{
-        _LOW_,
-        _ANY_,
-        _DOWN_,
-        _UP_
+        LOW,
+        ANY,
+        DOWN,
+        UP
     };
     
 
