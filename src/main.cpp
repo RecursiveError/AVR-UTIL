@@ -12,9 +12,10 @@ int main(){
 	digitalIO::DigitalIO(3).output().set_low();
 	Liquidcrystal my_lcd(Lcd2EN_4bits(12,13,4,11,10,9,8));
 	external_int::External_int()
-		.event_on(_INT0_, DOWN, [](){
+		.event_on(_INT0_, DOWN, []()-> void{
 			tick++;
 		});
+		
 	comparator::Adc_comparator().set_event(comparator::ANY, []()-> void{
 		if(comparator::Adc_comparator().get_output()){
 			digitalIO::DigitalIO(3).set_high();
@@ -33,10 +34,10 @@ int main(){
 		.write("- TICKS: ")
 		.set_cursor(0, 10)
 		.write(tick)
-		.set_cursor(1, 0)
+		.set_cursor(2, 0)
 		.write("COMP:")
-		.set_cursor(1, 10)
+		.set_cursor(2, 10)
 		.write(comp_std);
 	}
 	return 0;
-}
+} 
