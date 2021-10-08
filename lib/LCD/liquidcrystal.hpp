@@ -21,7 +21,8 @@ namespace liquidcrystal{
         public:
             template <class lcd_config>
             Liquidcrystal(lcd_config Tconfig){
-                lcd_type = fakestd::make_uniq<lcd_config>(Tconfig);
+                //lcd_type = fakestd::make_uniq<lcd_config>(Tconfig);
+                lcd_type = new lcd_config(Tconfig);
             }
 
             Liquidcrystal& init(uint8_t cols, uint8_t line);
@@ -37,7 +38,8 @@ namespace liquidcrystal{
             Liquidcrystal& set_cursor(uint8_t line, uint8_t cols);
         private:
             uint8_t _cols{0}, _line{0};
-            fakestd::uniq_ptr<lcdbaseclass> lcd_type;
+            //fakestd::uniq_ptr<lcdbaseclass> lcd_type;
+            lcdbaseclass* lcd_type;
     };
 }
 #endif

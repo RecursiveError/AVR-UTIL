@@ -45,4 +45,11 @@ int main(){
 ```
 
 
+### Alterações 
+ - smart pointers removidos
+ > motivo:
+ >
+ > por ser uma plataforma limitada o uso de alocação dinamica pode gerar problemas como fragmentação de memoria, a linguagem não tem relações com o problema
+
+
 
