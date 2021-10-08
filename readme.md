@@ -24,3 +24,6 @@ melhorias nas bibliotecas do repositório
 - [ ] melhoria na lib Timer
 - [x] [melhoria na lib Interrupt](lib/Interrupt)
 
+### novidades 
+- [lib de interrupções externas](lib/external_interrupt)
+- [lib para o comparador adc](lib/adc_comp)
