@@ -4,6 +4,7 @@ biblioteca com as funções basicas de perifericos E operações para manipulaç
 
 #ifndef _IO_HPP
 #define _IO_HPP
+#define IO_NULL_PORT 255u
 
 #include <stdint.h>
 namespace digitalIO{
