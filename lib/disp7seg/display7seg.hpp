@@ -1,3 +1,10 @@
+/*
+Programa: Display7seg
+Autor: RecursiveError
+
+programa para trabahlar com displays de 7 segmentos 4 digitos
+*/
+
 #ifndef _7_SEG_DISP_HPP
 #define _7_SEG_DISP_HPP
 #include <stdint.h>
@@ -15,7 +22,7 @@ namespace display7seg{
             
         public:
             Display(uint8_t A, uint8_t B, uint8_t C, uint8_t D, uint8_t E, uint8_t F, uint8_t G,
-                uint8_t digit1, uint8_t digit2 = IO_NULL_PORT, uint8_t digit3 = IO_NULL_PORT, uint8_t digit4 = IO_NULL_PORT):
+                uint8_t digit1, uint8_t digit2, uint8_t digit3, uint8_t digit4):
             _segments{A,B,C,D,E,F,G},
             _digits{digit1, digit2, digit3, digit4}
             {}

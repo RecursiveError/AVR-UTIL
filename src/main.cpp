@@ -1,16 +1,17 @@
 #include "util/delay.h"
-#include <avr/pgmspace.h>
-#include <usart.hpp>
+#include "display7seg.hpp"
 
-const char text[] = "HELLO WORLD!\n\0";
+unsigned int tick = 0;
 int main(){
-	usart::Usart my_output;
-	my_output.enable();
+	display7seg::Display my_display(7, 6, 5, 4, 3, 2, 19, 15, 16, 17, 18);
+	my_display.init();
+
 	for(;;){
-		for(int i = 0; text[i] != '\0'; i++){
-			my_output.transmit(text[i]);
-		}
-		_delay_ms(1000);
+		my_display.write(tick/10);
+		tick++;
+		if(tick > 0xFFF8)tick = 0;
+		my_display.update();
+		_delay_ms(5);
 	}
 	return 0;
 } 

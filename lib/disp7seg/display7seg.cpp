@@ -23,10 +23,14 @@ namespace display7seg{
 
     Display& Display::write(uint16_t value){
         if(value > 9999u) return *this;
-        this->write((uint8_t)(value/1000)%10, 0);
-        this->write((uint8_t)(value/100)%10, 1);
-        this->write((uint8_t)(value/10)%10, 2);
-        this->write((uint8_t)(value/1)%10, 3);
+        uint8_t M = (value/1000)%10;
+        uint8_t C = (value/100)%10;
+        uint8_t D = (value/10)%10;
+        uint8_t U = (value/1)%10;
+        this->write(M, 0);
+        this->write(C, 1);
+        this->write(D, 2);
+        this->write(U, 3);
         return *this;
     }
 
