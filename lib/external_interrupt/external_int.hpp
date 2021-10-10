@@ -1,3 +1,10 @@
+/*
+Programa: External_int
+Autor: RecursiveError
+
+lib para interrupções externas 
+*/
+
 #ifndef EXTERNAL_INT_HPP
 #define EXTERNAL_INT_HPP
 typedef void (*handler_func)();
