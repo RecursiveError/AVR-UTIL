@@ -1,14 +1,18 @@
 #include "adc.hpp"
 #include <avr/io.h>
+
 namespace adc{
-    Adc& Adc::init(Tref ref, uint8_t prescaler, bool adjust){
-        ADMUX |= (ref << REFS0) | (adjust << ADLAR);
-        ADCSRA |= (1<<ADEN) | (prescaler<<ADTS0);
+    Adc::Adc(Tref ref, uint8_t prescaler, bool adjust){
+        this->configure(ref,prescaler,adjust);
+    }
+
+    Adc& Adc::enable(){
+        ADCSRA = (1<<ADEN);
         return *this;
     }
 
     Adc& Adc::disable(){
-        ADCSRA = 0;
+        ADCSRA = (0<<ADEN);
         DIDR0 = 0;
         return *this;
     }
@@ -32,14 +36,25 @@ namespace adc{
     }
 
     uint16_t Adc::read(channel adc_pin){
+        ADMUX = (ADMUX & 0xF0) | (adc_pin & 0x0F);
+        DIDR0 |= adc_pin < 6 ? (1<<adc_pin) : DIDR0;
         this->start();
-        DIDR0 |= (1<<adc_pin);
         while(!(ADCSRA & (1<<ADSC)));
         DIDR0 |= (0<<adc_pin);
-        return (uint16_t) (ADCL|(ADCH<<8));
+        return (ADCL|(ADCH<<8));
     }
 
     bool Adc::get_flag(){
         return ADCSRA & (1<<ADIF);
+    }
+
+    Adc& Adc::operator()(Tref ref, uint8_t prescaler, bool adjust){
+        this->configure(ref,prescaler,adjust);
+        return *this;
+    }
+
+    void Adc::configure(Tref ref, uint8_t prescaler, bool adjust){
+        ADMUX |= (ref << REFS0) | (adjust << ADLAR);
+        ADCSRA |= (1<<ADEN) | (prescaler<<ADTS0);
     }
 }

@@ -41,13 +41,17 @@ namespace adc {
 
     class Adc{
         public:
-            Adc& init(Tref ref = INTERNAL, uint8_t prescaler = 7, bool adjust = false);
+            Adc(Tref ref, uint8_t prescaler, bool adjust);
+            Adc& enable();
             Adc& disable();
             Adc& trigger(Ftrigger trigger);
             Adc& start();
             Adc& set_event(handler_func callback);
             uint16_t read(channel adc_pin);
             bool get_flag();
+            Adc& operator()(Tref ref, uint8_t prescaler, bool adjust);
+        private:
+            void configure(Tref ref, uint8_t prescaler, bool adjust);
     };
 }
 
