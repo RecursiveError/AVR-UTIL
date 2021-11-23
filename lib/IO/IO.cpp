@@ -21,7 +21,7 @@ namespace digitalIO{
         if(this->_pin < 8u){
             DDRD &= ~(1<<this->_pin);
         }
-        if(this->_pin > 14u){
+        if(this->_pin < 14u){
             DDRB &= ~(1<<(this->_pin - 8u));
         }else if(this->_pin < 20u){
             DDRC &= ~(1<<(this->_pin - 14u));

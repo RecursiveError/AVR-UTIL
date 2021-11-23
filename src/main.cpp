@@ -1,43 +1,52 @@
-#include "external_int.hpp"
-#include "util/delay.h"
-#include "IO.hpp"
+#include <util/delay.h>
+#include "display7seg.hpp"
 #include "liquidcrystal.hpp"
-#include "adc_comp.hpp"
+#include "usart.hpp"
+#include "adc.hpp"
+#include "interrupt.hpp"
+#include "IO.hpp"
 
-using namespace external_int;
-using namespace liquidcrystal;
-int tick = 0;
-int comp_std = 0;
 int main(){
-	digitalIO::DigitalIO(3).output().set_low();
-	Liquidcrystal my_lcd(Lcd2EN_4bits(12,13,4,11,10,9,8));
-	external_int::External_int()
-		.event_on(_INT0_, DOWN, []()-> void{
-			tick++;
-		});
-		
-	comparator::Adc_comparator().set_event(comparator::ANY, []()-> void{
-		if(comparator::Adc_comparator().get_output()){
-			digitalIO::DigitalIO(3).set_high();
-			comp_std = 1;
-		}
-		else{
-			digitalIO::DigitalIO(3).set_low();
-			comp_std = 0;
-		}
-	})
-	.enable();
+	digitalIO::DigitalIO red(7);
+	digitalIO::DigitalIO blue(5);
+	digitalIO::DigitalIO green(6);
+	red.output().set_high();
+	blue.output().set_high();
+	green.output().set_high();
 
+	int result_lux = 0;
+
+	adc::Adc scanner(adc::AVCC, 7, false);
+	liquidcrystal::Liquidcrystal my_lcd(liquidcrystal::Lcd_4bits(13,12,8,9,10,11));
+	my_lcd.init(16, 2)
+	  .write("LuximetroDigital")
+	  .set_cursor(1,0)
+	  .write("Lux:\0");
 	for(;;){
-		my_lcd.init(40, 4)
-		.set_cursor(0,0)
-		.write("- TICKS: ")
-		.set_cursor(0, 10)
-		.write(tick)
-		.set_cursor(2, 0)
-		.write("COMP:")
-		.set_cursor(2, 10)
-		.write(comp_std);
+		result_lux = scanner.read(adc::ADC0);
+		my_lcd.set_cursor(1,10).write(result_lux);
+		if(result_lux > 550){
+			green.set_high();
+			red.set_low();
+		}else{
+			red.set_high();
+			green.set_low();
+		}
+		_delay_ms(75);
 	}
+
 	return 0;
 } 
+
+void usart_print_num(unsigned int value){
+	if(value > 9999u) return;
+    uint8_t M = (value/1000)%10;
+    uint8_t C = (value/100)%10;
+    uint8_t D = (value/10)%10;
+    uint8_t U = (value/1)%10;
+	usart::Usart().transmit(M+'0')
+	.transmit(C+'0')
+	.transmit(D+'0')
+	.transmit(U+'0')
+	.transmit('\n');
+}
